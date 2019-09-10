@@ -25,8 +25,9 @@ export default class App extends Component {
 
     return (
       <View>
+        {/* Novidade aqui! */}
         {animais.map(animal => (
-          <View>
+          <View key={animal.nome}>
             <Text style={styles.nomeAnimal}>{animal.nome}</Text>
             <Image
               source={{
