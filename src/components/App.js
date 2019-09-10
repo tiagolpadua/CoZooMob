@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const {width} = Dimensions.get('screen');
 
@@ -25,18 +32,21 @@ export default class App extends Component {
 
     return (
       <View>
-        {/* Novidade aqui! */}
-        {animais.map(animal => (
-          <View key={animal.nome}>
-            <Text style={styles.nomeAnimal}>{animal.nome}</Text>
-            <Image
-              source={{
-                uri: animal.urlImagem,
-              }}
-              style={styles.imagemAnimal}
-            />
-          </View>
-        ))}
+        <FlatList
+          data={animais}
+          renderItem={({item}) => (
+            <View>
+              <Text style={styles.nomeAnimal}>{item.nome}</Text>
+              <Image
+                source={{
+                  uri: item.urlImagem,
+                }}
+                style={styles.imagemAnimal}
+              />
+            </View>
+          )}
+          keyExtractor={item => item.nome}
+        />
       </View>
     );
   }
@@ -46,3 +56,5 @@ const styles = StyleSheet.create({
   nomeAnimal: {fontSize: 16},
   imagemAnimal: {width, height: width},
 });
+
+// {/* Novidade aqui! */}
