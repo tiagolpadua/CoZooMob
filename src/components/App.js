@@ -1,21 +1,31 @@
 import React, {Component} from 'react';
-import {Image, Text, View, Dimensions} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+
+const {width} = Dimensions.get('screen');
 
 export default class App extends Component {
   render() {
-    const {width} = Dimensions.get('screen');
+    const animal = {
+      nome: 'Leão',
+      urlImagem:
+        'https://upload.wikimedia.org/wikipedia/commons/4/40/Just_one_lion.jpg',
+    };
 
     return (
       <View>
-        <Text style={{fontSize: 16}}>Leão</Text>
+        <Text style={styles.nomeAnimal}>{animal.nome}</Text>
         <Image
           source={{
-            uri:
-              'https://upload.wikimedia.org/wikipedia/commons/4/40/Just_one_lion.jpg',
+            uri: animal.urlImagem,
           }}
-          style={{width, height: width}}
+          style={styles.imagemAnimal}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  nomeAnimal: {fontSize: 16},
+  imagemAnimal: {width, height: width},
+});
