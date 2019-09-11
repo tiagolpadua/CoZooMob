@@ -1,16 +1,8 @@
 import React, {Component} from 'react';
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, View} from 'react-native';
+import Animal from './Animal';
 
-const {width} = Dimensions.get('screen');
-
-export default class App extends Component {
+export default class ListaAnimais extends Component {
   render() {
     const animais = [
       {
@@ -34,27 +26,10 @@ export default class App extends Component {
       <View>
         <FlatList
           data={animais}
-          renderItem={({item}) => (
-            <View>
-              <Text style={styles.nomeAnimal}>{item.nome}</Text>
-              <Image
-                source={{
-                  uri: item.urlImagem,
-                }}
-                style={styles.imagemAnimal}
-              />
-            </View>
-          )}
+          renderItem={({item}) => <Animal animal={item} />}
           keyExtractor={item => item.nome}
         />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  nomeAnimal: {fontSize: 16},
-  imagemAnimal: {width, height: width},
-});
-
-// {/* Novidade aqui! */}
