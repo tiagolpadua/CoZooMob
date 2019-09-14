@@ -1,12 +1,7 @@
-import {Body, Card, CardItem, Icon} from 'native-base';
+import {Body, Card, CardItem} from 'native-base';
 import React, {Component} from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text} from 'react-native';
+import BotaoFavoritar from './BotaoFavoritar';
 
 const {width} = Dimensions.get('screen');
 
@@ -16,50 +11,6 @@ export default class Animal extends Component {
     this.state = {
       animal: this.props.animal,
     };
-  }
-
-  isFavoritado(animal, usuarioLogado) {
-    return !!animal.favoritoUsuarios.find(usuario => usuario === usuarioLogado);
-  }
-
-  favoritar = (animal, usuarioLogado) => {
-    let novoAnimal = {...animal};
-
-    novoAnimal.favoritoUsuarios = [
-      ...novoAnimal.favoritoUsuarios,
-      usuarioLogado,
-    ];
-
-    this.setState({animal: novoAnimal});
-  };
-
-  desfavoritar = (animal, usuarioLogado) => {
-    let novoAnimal = {...animal};
-
-    novoAnimal.favoritoUsuarios = novoAnimal.favoritoUsuarios.filter(
-      usuario => usuario !== usuarioLogado,
-    );
-
-    this.setState({animal: novoAnimal});
-  };
-
-  botaoFavorito(animal, usuarioLogado) {
-    let favoritado = this.isFavoritado(animal, usuarioLogado);
-
-    if (favoritado) {
-      return (
-        <TouchableOpacity
-          onPress={() => this.desfavoritar(animal, usuarioLogado)}>
-          <Icon name="star" />
-        </TouchableOpacity>
-      );
-    } else {
-      return (
-        <TouchableOpacity onPress={() => this.favoritar(animal, usuarioLogado)}>
-          <Icon name="star-outline" />
-        </TouchableOpacity>
-      );
-    }
   }
 
   render() {
@@ -82,7 +33,7 @@ export default class Animal extends Component {
           </Body>
         </CardItem>
         <CardItem footer bordered>
-          {this.botaoFavorito(animal, usuarioLogado)}
+          <BotaoFavoritar animal={animal} usuarioLogado={usuarioLogado} />
           <Text>
             Este animal
             {animal.favoritoUsuarios.length > 0
