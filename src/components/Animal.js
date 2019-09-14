@@ -19,12 +19,12 @@ export default class Animal extends Component {
     };
   }
 
-  favoritar() {
+  favoritar = () => {
     const {animal} = this.state;
     let novoAnimal = {...animal};
     novoAnimal.favoritado = !novoAnimal.favoritado;
     this.setState({animal: novoAnimal});
-  }
+  };
 
   render() {
     const {animal} = this.state;
@@ -46,7 +46,7 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <TouchableOpacity onPress={() => this.favoritar()}>
+        <TouchableOpacity onPress={this.favoritar}>
           {iconeFavoritado}
         </TouchableOpacity>
         <Text>Foi favoritado: {animal.favoritado + ''}</Text>
