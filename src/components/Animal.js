@@ -15,17 +15,23 @@ export default class Animal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      favoritado: false,
+      animal: this.props.animal,
     };
   }
 
+  favoritar() {
+    const {animal} = this.state;
+    let novoAnimal = {...animal};
+    novoAnimal.favoritado = !novoAnimal.favoritado;
+    this.setState({animal: novoAnimal});
+  }
+
   render() {
-    const {animal} = this.props;
-    const {favoritado} = this.state;
+    const {animal} = this.state;
 
     let iconeFavoritado;
 
-    if (favoritado) {
+    if (animal.favoritado) {
       iconeFavoritado = <Icon name="star" />;
     } else {
       iconeFavoritado = <Icon name="star-outline" />;
@@ -40,11 +46,10 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <TouchableOpacity
-          onPress={() => this.setState({favoritado: !favoritado})}>
+        <TouchableOpacity onPress={this.favoritar}>
           {iconeFavoritado}
         </TouchableOpacity>
-        <Text>Foi favoritado: {favoritado + ''}</Text>
+        <Text>Foi favoritado: {animal.favoritado + ''}</Text>
       </View>
     );
   }
