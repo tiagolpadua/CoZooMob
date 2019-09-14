@@ -12,9 +12,12 @@ import {
 const {width} = Dimensions.get('screen');
 
 export default class Animal extends Component {
-  state = {
-    contador: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      contador: 0,
+    };
+  }
 
   render() {
     const {animal} = this.props;
