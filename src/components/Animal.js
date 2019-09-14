@@ -14,7 +14,6 @@ const {width} = Dimensions.get('screen');
 export default class Animal extends Component {
   constructor(props) {
     super(props);
-    this.favoritar = this.favoritar.bind(this);
     this.state = {
       animal: this.props.animal,
     };
@@ -47,7 +46,7 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <TouchableOpacity onPress={this.favoritar}>
+        <TouchableOpacity onPress={() => this.favoritar()}>
           {iconeFavoritado}
         </TouchableOpacity>
         <Text>Foi favoritado: {animal.favoritado + ''}</Text>
