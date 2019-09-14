@@ -26,16 +26,24 @@ export default class Animal extends Component {
     this.setState({animal: novoAnimal});
   };
 
-  render() {
-    const {animal} = this.state;
-
-    let iconeFavoritado;
+  botaoFavorito(animal) {
+    let iconeFavorito;
 
     if (animal.favoritado) {
-      iconeFavoritado = <Icon name="star" />;
+      iconeFavorito = <Icon name="star" />;
     } else {
-      iconeFavoritado = <Icon name="star-outline" />;
+      iconeFavorito = <Icon name="star-outline" />;
     }
+
+    return (
+      <TouchableOpacity onPress={this.favoritar}>
+        {iconeFavorito}
+      </TouchableOpacity>
+    );
+  }
+
+  render() {
+    const {animal} = this.state;
 
     return (
       <View>
@@ -46,9 +54,7 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <TouchableOpacity onPress={this.favoritar}>
-          {iconeFavoritado}
-        </TouchableOpacity>
+        {this.botaoFavorito(animal)}
         <Text>Foi favoritado: {animal.favoritado + ''}</Text>
       </View>
     );
