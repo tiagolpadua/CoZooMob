@@ -78,7 +78,10 @@ export default class Animal extends Component {
         />
         {this.botaoFavorito(animal, usuarioLogado)}
         <Text>
-          Foi favoritado: {this.isFavoritado(animal, usuarioLogado) + ''}
+          Este animal
+          {animal.favoritoUsuarios.length > 0
+            ? ` já foi favoritado por ${animal.favoritoUsuarios.length} usuario(s)`
+            : ' ainda não foi favoritado'}
         </Text>
       </View>
     );
