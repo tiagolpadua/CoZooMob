@@ -12,6 +12,10 @@ import {
 const {width} = Dimensions.get('screen');
 
 export default class Animal extends Component {
+  state = {
+    contador: 0,
+  };
+
   render() {
     const {animal} = this.props;
     return (
@@ -23,9 +27,11 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <TouchableOpacity onPress={() => console.warn('Favoritado!')}>
+        <TouchableOpacity
+          onPress={() => this.setState({contador: this.state.contador + 1})}>
           <Icon name="star" />
         </TouchableOpacity>
+        <Text>Foi favoritado {this.state.contador} vezes</Text>
       </View>
     );
   }
