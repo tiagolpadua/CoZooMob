@@ -1,6 +1,13 @@
 import {Icon} from 'native-base';
 import React, {Component} from 'react';
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const {width} = Dimensions.get('screen');
 
@@ -16,7 +23,9 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <Icon name="star" />
+        <TouchableOpacity onPress={console.warn('Favoritado!')}>
+          <Icon name="star" />
+        </TouchableOpacity>
       </View>
     );
   }
