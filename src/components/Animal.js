@@ -23,7 +23,7 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <TouchableOpacity onPress={console.warn('Favoritado!')}>
+        <TouchableOpacity onPress={() => console.warn('Favoritado!')}>
           <Icon name="star" />
         </TouchableOpacity>
       </View>
