@@ -11,46 +11,18 @@ export default class BotaoFavoritar extends Component {
     };
   }
 
-  isFavoritado(animal, usuarioLogado) {
-    return !!animal.favoritoUsuarios.find(usuario => usuario === usuarioLogado);
-  }
-
-  favoritar = (animal, usuarioLogado) => {
-    let novoAnimal = {...animal};
-
-    novoAnimal.favoritoUsuarios = [
-      ...novoAnimal.favoritoUsuarios,
-      usuarioLogado,
-    ];
-
-    this.setState({animal: novoAnimal});
-  };
-
-  desfavoritar = (animal, usuarioLogado) => {
-    let novoAnimal = {...animal};
-
-    novoAnimal.favoritoUsuarios = novoAnimal.favoritoUsuarios.filter(
-      usuario => usuario !== usuarioLogado,
-    );
-
-    this.setState({animal: novoAnimal});
-  };
-
   render() {
-    const {animal, usuarioLogado} = this.state;
-
-    let favoritado = this.isFavoritado(animal, usuarioLogado);
+    const {favoritado, favoritarCallback, desfavoritarCallback} = this.props;
 
     if (favoritado) {
       return (
-        <TouchableOpacity
-          onPress={() => this.desfavoritar(animal, usuarioLogado)}>
+        <TouchableOpacity onPress={desfavoritarCallback}>
           <Icon name="star" />
         </TouchableOpacity>
       );
     } else {
       return (
-        <TouchableOpacity onPress={() => this.favoritar(animal, usuarioLogado)}>
+        <TouchableOpacity onPress={favoritarCallback}>
           <Icon name="star-outline" />
         </TouchableOpacity>
       );

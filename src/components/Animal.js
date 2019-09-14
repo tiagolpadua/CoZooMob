@@ -13,6 +13,37 @@ export default class Animal extends Component {
     };
   }
 
+  isFavoritado(animal, usuarioLogado) {
+    return !!animal.favoritoUsuarios.find(usuario => usuario === usuarioLogado);
+  }
+
+  favoritar = () => {
+    const {animal} = this.state;
+    const {usuarioLogado} = this.props;
+
+    let novoAnimal = {...animal};
+
+    novoAnimal.favoritoUsuarios = [
+      ...novoAnimal.favoritoUsuarios,
+      usuarioLogado,
+    ];
+
+    this.setState({animal: novoAnimal});
+  };
+
+  desfavoritar = () => {
+    const {animal} = this.state;
+    const {usuarioLogado} = this.props;
+
+    let novoAnimal = {...animal};
+
+    novoAnimal.favoritoUsuarios = novoAnimal.favoritoUsuarios.filter(
+      usuario => usuario !== usuarioLogado,
+    );
+
+    this.setState({animal: novoAnimal});
+  };
+
   render() {
     const {animal} = this.state;
     const {usuarioLogado} = this.props;
@@ -33,7 +64,11 @@ export default class Animal extends Component {
           </Body>
         </CardItem>
         <CardItem footer bordered>
-          <BotaoFavoritar animal={animal} usuarioLogado={usuarioLogado} />
+          <BotaoFavoritar
+            favoritado={this.isFavoritado(animal, usuarioLogado)}
+            favoritarCallback={this.favoritar}
+            desfavoritarCallback={this.desfavoritar}
+          />
           <Text>
             Este animal
             {animal.favoritoUsuarios.length > 0
