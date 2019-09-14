@@ -17,6 +17,39 @@ export default class ListaAnimais extends Component {
     };
   }
 
+  favoritar = animal => {
+    const {usuarioLogado} = this.state;
+
+    let novoAnimal = {...animal};
+
+    novoAnimal.favoritoUsuarios = [
+      ...novoAnimal.favoritoUsuarios,
+      usuarioLogado,
+    ];
+
+    const novosAnimais = this.state.animais.map(a =>
+      a._id === novoAnimal._id ? novoAnimal : a,
+    );
+
+    this.setState({animais: novosAnimais});
+  };
+
+  desfavoritar = animal => {
+    const {usuarioLogado} = this.state;
+
+    let novoAnimal = {...animal};
+
+    novoAnimal.favoritoUsuarios = novoAnimal.favoritoUsuarios.filter(
+      usuario => usuario !== usuarioLogado,
+    );
+
+    const novosAnimais = this.state.animais.map(a =>
+      a._id === novoAnimal._id ? novoAnimal : a,
+    );
+
+    this.setState({animais: novosAnimais});
+  };
+
   render() {
     const {animais, usuarioLogado} = this.state;
     return (
@@ -28,7 +61,12 @@ export default class ListaAnimais extends Component {
           <FlatList
             data={animais}
             renderItem={({item}) => (
-              <Animal animal={item} usuarioLogado={usuarioLogado} />
+              <Animal
+                animal={item}
+                usuarioLogado={usuarioLogado}
+                favoritarCallback={this.favoritar}
+                desfavoritarCallback={this.desfavoritar}
+              />
             )}
             keyExtractor={item => item.nome}
           />

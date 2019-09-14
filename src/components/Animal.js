@@ -6,47 +6,17 @@ import BotaoFavoritar from './BotaoFavoritar';
 const {width} = Dimensions.get('screen');
 
 export default class Animal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      animal: this.props.animal,
-    };
-  }
-
   isFavoritado(animal, usuarioLogado) {
     return !!animal.favoritoUsuarios.find(usuario => usuario === usuarioLogado);
   }
 
-  favoritar = () => {
-    const {animal} = this.state;
-    const {usuarioLogado} = this.props;
-
-    let novoAnimal = {...animal};
-
-    novoAnimal.favoritoUsuarios = [
-      ...novoAnimal.favoritoUsuarios,
-      usuarioLogado,
-    ];
-
-    this.setState({animal: novoAnimal});
-  };
-
-  desfavoritar = () => {
-    const {animal} = this.state;
-    const {usuarioLogado} = this.props;
-
-    let novoAnimal = {...animal};
-
-    novoAnimal.favoritoUsuarios = novoAnimal.favoritoUsuarios.filter(
-      usuario => usuario !== usuarioLogado,
-    );
-
-    this.setState({animal: novoAnimal});
-  };
-
   render() {
-    const {animal} = this.state;
-    const {usuarioLogado} = this.props;
+    const {
+      animal,
+      usuarioLogado,
+      favoritarCallback,
+      desfavoritarCallback,
+    } = this.props;
 
     return (
       <Card>
@@ -66,8 +36,8 @@ export default class Animal extends Component {
         <CardItem footer bordered>
           <BotaoFavoritar
             favoritado={this.isFavoritado(animal, usuarioLogado)}
-            favoritarCallback={this.favoritar}
-            desfavoritarCallback={this.desfavoritar}
+            favoritarCallback={() => favoritarCallback(animal)}
+            desfavoritarCallback={() => desfavoritarCallback(animal)}
           />
           <Text>
             Este animal
