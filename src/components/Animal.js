@@ -46,7 +46,7 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        <TouchableOpacity onPress={this.favoritar}>
+        <TouchableOpacity onPress={this.favoritar.bind(this)}>
           {iconeFavoritado}
         </TouchableOpacity>
         <Text>Foi favoritado: {animal.favoritado + ''}</Text>
