@@ -27,11 +27,7 @@ export default class ListaAnimais extends Component {
       usuarioLogado,
     ];
 
-    const novosAnimais = this.state.animais.map(a =>
-      a._id === novoAnimal._id ? novoAnimal : a,
-    );
-
-    this.setState({animais: novosAnimais});
+    this.atualizarAnimal(novoAnimal);
   };
 
   desfavoritar = animal => {
@@ -43,6 +39,10 @@ export default class ListaAnimais extends Component {
       usuario => usuario !== usuarioLogado,
     );
 
+    this.atualizarAnimal(novoAnimal);
+  };
+
+  atualizarAnimal = novoAnimal => {
     const novosAnimais = this.state.animais.map(a =>
       a._id === novoAnimal._id ? novoAnimal : a,
     );
