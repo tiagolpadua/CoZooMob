@@ -21,6 +21,8 @@ export default class Animal extends Component {
 
   render() {
     const {animal} = this.props;
+    const {contador} = this.state;
+
     return (
       <View>
         <Text style={styles.nomeAnimal}>{animal.nome}</Text>
@@ -31,10 +33,10 @@ export default class Animal extends Component {
           style={styles.imagemAnimal}
         />
         <TouchableOpacity
-          onPress={() => this.setState({contador: this.state.contador + 1})}>
+          onPress={() => this.setState({contador: contador + 1})}>
           <Icon name="star" />
         </TouchableOpacity>
-        <Text>Foi favoritado {this.state.contador} vezes</Text>
+        <Text>Foi favoritado {contador} vezes</Text>
       </View>
     );
   }
