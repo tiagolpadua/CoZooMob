@@ -1,22 +1,9 @@
-import {Container, Content, Header, Title} from 'native-base';
 import React, {Component} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
-import {
-  animais as animaisData,
-  usuarioLogado as usuarioLogadoData,
-} from '../../data.json';
+import {FlatList} from 'react-native';
+import {connect} from 'react-redux';
 import Animal from './Animal';
 
-export default class ListaAnimais extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      animais: animaisData,
-      usuarioLogado: usuarioLogadoData,
-    };
-  }
-
+class ListaAnimais extends Component {
   favoritar = animal => {
     const {usuarioLogado} = this.state;
 
@@ -51,36 +38,34 @@ export default class ListaAnimais extends Component {
   };
 
   render() {
-    const {animais, usuarioLogado} = this.state;
+    const {animais, usuarioLogado} = this.props;
     return (
-      <Container>
-        <Header style={styles.header}>
-          <Title>Controle de Animais</Title>
-        </Header>
-        <Content padder>
-          <FlatList
-            data={animais}
-            renderItem={({item}) => (
-              <Animal
-                animal={item}
-                usuarioLogado={usuarioLogado}
-                favoritarCallback={this.favoritar}
-                desfavoritarCallback={this.desfavoritar}
-              />
-            )}
-            keyExtractor={item => item.nome}
+      <FlatList
+        data={animais}
+        renderItem={({item}) => (
+          <Animal
+            animal={item}
+            usuarioLogado={usuarioLogado}
+            favoritarCallback={this.favoritar}
+            desfavoritarCallback={this.desfavoritar}
           />
-        </Content>
-      </Container>
+        )}
+        keyExtractor={item => item.nome}
+      />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  header: {height: 30},
-  separator: {
-    height: 1,
-    backgroundColor: '#CED0CE',
-    marginBottom: 10,
-  },
-});
+const mapStateToProps = state => {
+  return {
+    animais: state.animais,
+    usuarioLogado: state.usuarioLogado,
+  };
+};
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ListaAnimais);
