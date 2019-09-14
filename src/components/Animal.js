@@ -23,6 +23,14 @@ export default class Animal extends Component {
     const {animal} = this.props;
     const {favoritado} = this.state;
 
+    let iconeFavoritado;
+
+    if (favoritado) {
+      iconeFavoritado = <Icon name="star" />;
+    } else {
+      iconeFavoritado = <Icon name="star-outline" />;
+    }
+
     return (
       <View>
         <Text style={styles.nomeAnimal}>{animal.nome}</Text>
@@ -34,7 +42,7 @@ export default class Animal extends Component {
         />
         <TouchableOpacity
           onPress={() => this.setState({favoritado: !favoritado})}>
-          <Icon name="star" />
+          {iconeFavoritado}
         </TouchableOpacity>
         <Text>Foi favoritado: {favoritado + ''}</Text>
       </View>
