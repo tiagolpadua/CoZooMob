@@ -1,11 +1,11 @@
-import {Container, Content, Header, Title, View} from 'native-base';
+import {Container, Content, Header, Title} from 'native-base';
 import React, {Component} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
-import Animal from './Animal';
 import {
   animais as animaisData,
   usuarioLogado as usuarioLogadoData,
 } from '../../data.json';
+import Animal from './Animal';
 
 export default class ListaAnimais extends Component {
   constructor(props) {
