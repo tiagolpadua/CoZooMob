@@ -24,10 +24,9 @@ export default class ListaAnimais extends Component {
         <Header style={styles.header}>
           <Title>Controle de Animais</Title>
         </Header>
-        <Content>
+        <Content padder>
           <FlatList
             data={animais}
-            ItemSeparatorComponent={() => <View style={styles.separator} />}
             renderItem={({item}) => (
               <Animal animal={item} usuarioLogado={usuarioLogado} />
             )}

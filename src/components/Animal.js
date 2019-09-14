@@ -1,4 +1,4 @@
-import {Icon} from 'native-base';
+import {Body, Card, CardItem, Icon} from 'native-base';
 import React, {Component} from 'react';
 import {
   Dimensions,
@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 
 const {width} = Dimensions.get('screen');
@@ -68,27 +67,40 @@ export default class Animal extends Component {
     const {usuarioLogado} = this.props;
 
     return (
-      <View>
-        <Text style={styles.nomeAnimal}>{animal.nome}</Text>
-        <Image
-          source={{
-            uri: animal.urlImagem,
-          }}
-          style={styles.imagemAnimal}
-        />
-        {this.botaoFavorito(animal, usuarioLogado)}
-        <Text>
-          Este animal
-          {animal.favoritoUsuarios.length > 0
-            ? ` já foi favoritado por ${animal.favoritoUsuarios.length} usuário(s)`
-            : ' ainda não foi favoritado'}
-        </Text>
-      </View>
+      <Card>
+        <CardItem header bordered>
+          <Text style={styles.nomeAnimal}>{animal.nome}</Text>
+        </CardItem>
+        <CardItem bordered>
+          <Body style={styles.imageContainer}>
+            <Image
+              source={{
+                uri: animal.urlImagem,
+              }}
+              style={styles.imagemAnimal}
+            />
+          </Body>
+        </CardItem>
+        <CardItem footer bordered>
+          {this.botaoFavorito(animal, usuarioLogado)}
+          <Text>
+            Este animal
+            {animal.favoritoUsuarios.length > 0
+              ? ` já foi favoritado por ${animal.favoritoUsuarios.length} usuário(s)`
+              : ' ainda não foi favoritado'}
+          </Text>
+        </CardItem>
+      </Card>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  nomeAnimal: {fontSize: 16},
-  imagemAnimal: {width, height: width},
+  nomeAnimal: {fontSize: 18, fontWeight: 'bold'},
+  imagemAnimal: {width: width * 0.7, height: width * 0.7},
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
