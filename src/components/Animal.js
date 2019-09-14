@@ -19,31 +19,53 @@ export default class Animal extends Component {
     };
   }
 
-  favoritar = () => {
-    const {animal} = this.state;
+  isFavoritado(animal, usuarioLogado) {
+    return !!animal.favoritoUsuarios.find(usuario => usuario === usuarioLogado);
+  }
+
+  favoritar = (animal, usuarioLogado) => {
     let novoAnimal = {...animal};
-    novoAnimal.favoritado = !novoAnimal.favoritado;
+
+    novoAnimal.favoritoUsuarios = [
+      ...novoAnimal.favoritoUsuarios,
+      usuarioLogado,
+    ];
+
     this.setState({animal: novoAnimal});
   };
 
-  botaoFavorito(animal) {
-    let iconeFavorito;
+  desfavoritar = (animal, usuarioLogado) => {
+    let novoAnimal = {...animal};
 
-    if (animal.favoritado) {
-      iconeFavorito = <Icon name="star" />;
-    } else {
-      iconeFavorito = <Icon name="star-outline" />;
-    }
-
-    return (
-      <TouchableOpacity onPress={this.favoritar}>
-        {iconeFavorito}
-      </TouchableOpacity>
+    novoAnimal.favoritoUsuarios = novoAnimal.favoritoUsuarios.filter(
+      usuario => usuario !== usuarioLogado,
     );
+
+    this.setState({animal: novoAnimal});
+  };
+
+  botaoFavorito(animal, usuarioLogado) {
+    let favoritado = this.isFavoritado(animal, usuarioLogado);
+
+    if (favoritado) {
+      return (
+        <TouchableOpacity
+          onPress={() => this.desfavoritar(animal, usuarioLogado)}>
+          <Icon name="star" />
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity onPress={() => this.favoritar(animal, usuarioLogado)}>
+          <Icon name="star-outline" />
+        </TouchableOpacity>
+      );
+    }
   }
 
   render() {
     const {animal} = this.state;
+    const {usuarioLogado} = this.props;
 
     return (
       <View>
@@ -54,8 +76,10 @@ export default class Animal extends Component {
           }}
           style={styles.imagemAnimal}
         />
-        {this.botaoFavorito(animal)}
-        <Text>Foi favoritado: {animal.favoritado + ''}</Text>
+        {this.botaoFavorito(animal, usuarioLogado)}
+        <Text>
+          Foi favoritado: {this.isFavoritado(animal, usuarioLogado) + ''}
+        </Text>
       </View>
     );
   }
