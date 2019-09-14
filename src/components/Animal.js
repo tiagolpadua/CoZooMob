@@ -80,7 +80,7 @@ export default class Animal extends Component {
         <Text>
           Este animal
           {animal.favoritoUsuarios.length > 0
-            ? ` já foi favoritado por ${animal.favoritoUsuarios.length} usuario(s)`
+            ? ` já foi favoritado por ${animal.favoritoUsuarios.length} usuário(s)`
             : ' ainda não foi favoritado'}
         </Text>
       </View>
