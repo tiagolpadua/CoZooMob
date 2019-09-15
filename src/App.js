@@ -2,7 +2,7 @@ import {Container, Content, Header, Title} from 'native-base';
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
-import ListaAnimais from './components/ListaAnimais';
+import Login from './screens/Login';
 import configureStore from './configureStore';
 
 const store = configureStore();
@@ -16,7 +16,7 @@ export default class App extends Component {
             <Title>Controle de Animais</Title>
           </Header>
           <Content padder>
-            <ListaAnimais />
+            <Login />
           </Content>
         </Container>
       </Provider>
