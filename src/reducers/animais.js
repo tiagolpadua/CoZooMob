@@ -1,5 +1,5 @@
 import {animais} from '../../data.json';
-import {FAVORITAR, DESFAVORITAR} from '../constants.js';
+import {FAVORITAR, DESFAVORITAR, CARREGAR_ANIMAIS} from '../constants.js';
 
 const initialState = animais;
 
@@ -9,6 +9,9 @@ function atualizaAnimal(listaAnimais, animal) {
 
 export default function animaisReducer(state = initialState, action) {
   switch (action.type) {
+    case CARREGAR_ANIMAIS:
+      return action.data;
+
     case FAVORITAR: {
       const {animal, usuario} = action.data;
       const novoAnimal = {...animal};

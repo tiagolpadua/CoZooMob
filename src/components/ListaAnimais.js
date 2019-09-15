@@ -2,8 +2,14 @@ import React, {Component} from 'react';
 import {FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import Animal from './Animal';
+import {carregarAnimais} from '../actions';
+import {bindActionCreators} from 'redux';
 
 class ListaAnimais extends Component {
+  componentDidMount() {
+    this.props.carregarAnimais();
+  }
+
   render() {
     const {animais} = this.props;
     return (
@@ -23,7 +29,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({carregarAnimais}, dispatch);
 
 export default connect(
   mapStateToProps,
