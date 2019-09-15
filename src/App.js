@@ -1,11 +1,24 @@
 import {Container, Content, Header, Title} from 'native-base';
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import {Provider} from 'react-redux';
-import Login from './screens/Login';
 import configureStore from './configureStore';
+import Login from './screens/Login';
 
 const store = configureStore();
+
+const AppNavigator = createStackNavigator(
+  {
+    Login,
+  },
+  {
+    initialRouteName: 'Login',
+  },
+);
+
+const Navigation = createAppContainer(AppNavigator);
 
 export default class App extends Component {
   render() {
@@ -15,9 +28,7 @@ export default class App extends Component {
           <Header style={styles.header}>
             <Title>Controle de Animais</Title>
           </Header>
-          <Content padder>
-            <Login />
-          </Content>
+          <Navigation />
         </Container>
       </Provider>
     );
