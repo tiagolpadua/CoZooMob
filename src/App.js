@@ -1,6 +1,6 @@
-import {Container, Content, Header, Title} from 'native-base';
+import {Container, Header, Title} from 'native-base';
 import React, {Component} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Provider} from 'react-redux';
@@ -15,6 +15,13 @@ const AppNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'Login',
+    defaultNavigationOptions: {
+      header: () => (
+        <Header style={styles.header}>
+          <Title>Controle de Animais</Title>
+        </Header>
+      ),
+    },
   },
 );
 
@@ -25,9 +32,6 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Container>
-          <Header style={styles.header}>
-            <Title>Controle de Animais</Title>
-          </Header>
           <Navigation />
         </Container>
       </Provider>
