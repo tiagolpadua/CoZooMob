@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // baseURL: 'https://cozooapi.herokuapp.com/v1/',
-  baseURL: 'localhost:3000/v1/',
+  baseURL: 'https://cozooapi.herokuapp.com/v1/',
+  // baseURL: 'http://192.168.0.4:3000/v1/',
 });
 
 export function carregarAnimaisAPI() {
@@ -23,4 +23,8 @@ export function incluirAnimalAPI(animal) {
 
 export function atualizarAnimalAPI(animal) {
   return api.put(`/animais/${animal._id}`, animal);
+}
+
+export function loginAPI(usuario, senha) {
+  return api.post('/login', {usuario, senha});
 }

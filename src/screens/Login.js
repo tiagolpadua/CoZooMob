@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {carregarAnimais} from '../actions';
+import {login} from '../actions';
 
 class Login extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class Login extends Component {
   }
 
   login = () => {
-    console.warn(this.state.usuario + ' ' + this.state.senha);
+    this.props.login(this.state.usuario, this.state.senha);
   };
 
   render() {
@@ -48,7 +48,7 @@ class Login extends Component {
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => bindActionCreators({login}, dispatch);
 
 export default connect(
   mapStateToProps,
