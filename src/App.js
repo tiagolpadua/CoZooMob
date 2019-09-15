@@ -4,9 +4,10 @@ import {StyleSheet} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Provider} from 'react-redux';
-import configureStore from './configureStore';
-import Login from './components/Login';
 import ListaAnimais from './components/ListaAnimais';
+import Login from './components/Login';
+import Carregando from './components/Carregando';
+import configureStore from './configureStore';
 
 const store = configureStore();
 
@@ -35,6 +36,7 @@ export default class App extends Component {
       <Provider store={store}>
         <Container>
           <Navigation />
+          <Carregando />
         </Container>
       </Provider>
     );

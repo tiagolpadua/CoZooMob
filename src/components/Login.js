@@ -1,11 +1,11 @@
 import {
   Button,
+  Content,
   Form,
   Input,
   Item as FormItem,
   Label,
   Text,
-  Content,
 } from 'native-base';
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';

@@ -1,14 +1,31 @@
 import {carregarAnimaisAPI, loginAPI} from './api';
-import {LOGIN, CARREGAR_ANIMAIS, DESFAVORITAR, FAVORITAR} from './constants';
+import {
+  LOGIN,
+  CARREGAR_ANIMAIS,
+  DESFAVORITAR,
+  FAVORITAR,
+  SET_LOADING,
+} from './constants';
 
 export function login(usuario, senha) {
   return dispatch => {
-    return loginAPI(usuario, senha).then(res => {
-      dispatch({
-        type: LOGIN,
-        data: {usuarioLogado: usuario, token: res.data.token},
-      });
+    dispatch({
+      type: SET_LOADING,
+      data: true,
     });
+    return loginAPI(usuario, senha)
+      .then(res => {
+        dispatch({
+          type: LOGIN,
+          data: {usuarioLogado: usuario, token: res.data.token},
+        });
+      })
+      .finally(() => {
+        dispatch({
+          type: SET_LOADING,
+          data: false,
+        });
+      });
   };
 }
 
