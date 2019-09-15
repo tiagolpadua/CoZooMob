@@ -2,14 +2,18 @@ import {carregarAnimaisAPI} from './api';
 import {CARREGAR_ANIMAIS, DESFAVORITAR, FAVORITAR} from './constants';
 
 export function carregarAnimais() {
-  carregarAnimaisAPI()
-    .then(res => ({
-      type: CARREGAR_ANIMAIS,
-      data: res.data,
-    }))
-    .catch(error => {
-      console.warn(error.message);
-    });
+  return dispatch => {
+    carregarAnimaisAPI()
+      .then(res => {
+        dispatch({
+          type: CARREGAR_ANIMAIS,
+          data: res.data,
+        });
+      })
+      .catch(error => {
+        console.warn(error.message);
+      });
+  };
 }
 
 export function favoritar(animal, usuario) {
