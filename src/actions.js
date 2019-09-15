@@ -3,17 +3,12 @@ import {LOGIN, CARREGAR_ANIMAIS, DESFAVORITAR, FAVORITAR} from './constants';
 
 export function login(usuario, senha) {
   return dispatch => {
-    loginAPI(usuario, senha)
-      .then(res => {
-        console.warn(res);
-        dispatch({
-          type: LOGIN,
-          data: {usuarioLogado: usuario, token: res.data.token},
-        });
-      })
-      .catch(error => {
-        console.warn(error.message);
+    return loginAPI(usuario, senha).then(res => {
+      dispatch({
+        type: LOGIN,
+        data: {usuarioLogado: usuario, token: res.data.token},
       });
+    });
   };
 }
 

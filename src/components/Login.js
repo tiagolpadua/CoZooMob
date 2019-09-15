@@ -12,6 +12,7 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {login} from '../actions';
+import Alerta from '../util/Alerta';
 
 class Login extends Component {
   constructor(props) {
@@ -23,7 +24,12 @@ class Login extends Component {
   }
 
   login = () => {
-    this.props.login(this.state.usuario, this.state.senha);
+    this.props
+      .login(this.state.usuario, this.state.senha)
+      .then(() => this.props.navigation.navigate('ListaAnimais'))
+      .catch(() =>
+        Alerta.mensagem('Verifique o usuário e senha e tente novamente.'),
+      );
   };
 
   render() {
@@ -58,7 +64,8 @@ class Login extends Component {
 
 const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({login}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({login, dispatch}, dispatch);
 
 export default connect(
   mapStateToProps,

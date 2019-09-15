@@ -5,13 +5,15 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Provider} from 'react-redux';
 import configureStore from './configureStore';
-import Login from './screens/Login';
+import Login from './components/Login';
+import ListaAnimais from './components/ListaAnimais';
 
 const store = configureStore();
 
 const AppNavigator = createStackNavigator(
   {
     Login,
+    ListaAnimais,
   },
   {
     initialRouteName: 'Login',
