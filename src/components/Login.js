@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {login} from '../actions';
 import Alerta from '../util/Alerta';
+import {StackActions, NavigationActions} from 'react-navigation';
 
 class Login extends Component {
   constructor(props) {
@@ -26,7 +27,13 @@ class Login extends Component {
   login = () => {
     this.props
       .login(this.state.usuario, this.state.senha)
-      .then(() => this.props.navigation.navigate('ListaAnimais'))
+      .then(() => {
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({routeName: 'ListaAnimais'})],
+        });
+        this.props.navigation.dispatch(resetAction);
+      })
       .catch(() =>
         Alerta.mensagem('Verifique o usuário e senha e tente novamente.'),
       );
