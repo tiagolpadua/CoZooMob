@@ -19,8 +19,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario: '',
-      senha: '',
+      usuario: 'jose',
+      senha: '123456',
     };
   }
 
@@ -48,7 +48,7 @@ class Login extends Component {
             <Input
               onChangeText={text => this.setState({usuario: text})}
               autoCapitalize="none"
-              value={this.state.text}
+              value={this.state.usuario}
             />
           </FormItem>
           <FormItem floatingLabel last>
@@ -56,7 +56,7 @@ class Login extends Component {
             <Input
               secureTextEntry={true}
               onChangeText={text => this.setState({senha: text})}
-              value={this.state.text}
+              value={this.state.senha}
             />
           </FormItem>
 
