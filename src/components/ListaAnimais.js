@@ -1,9 +1,10 @@
+import {Content, Fab, Icon, View} from 'native-base';
 import React, {Component} from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import Animal from './Animal';
-import {carregarAnimais} from '../actions';
 import {bindActionCreators} from 'redux';
+import {carregarAnimais} from '../actions';
+import Animal from './Animal';
 
 class ListaAnimais extends Component {
   componentDidMount() {
@@ -13,11 +14,22 @@ class ListaAnimais extends Component {
   render() {
     const {animais} = this.props;
     return (
-      <FlatList
-        data={animais}
-        renderItem={({item}) => <Animal animal={item} />}
-        keyExtractor={item => item.nome}
-      />
+      <View style={styles.container}>
+        <Content padder>
+          <FlatList
+            data={animais}
+            renderItem={({item}) => <Animal animal={item} />}
+            keyExtractor={item => item.nome}
+          />
+        </Content>
+        <Fab
+          containerStyle={{}}
+          style={styles.fab}
+          position="bottomRight"
+          onPress={() => this.props.navigation.navigate('CadastroAnimal')}>
+          <Icon name="add" />
+        </Fab>
+      </View>
     );
   }
 }
@@ -36,3 +48,10 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(ListaAnimais);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  fab: {backgroundColor: '#5067FF'},
+});
