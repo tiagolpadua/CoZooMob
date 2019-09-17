@@ -1,4 +1,4 @@
-import {Container, Header, Title} from 'native-base';
+import {Container, Header, Title, Body, Left, Right} from 'native-base';
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 import {createAppContainer} from 'react-navigation';
@@ -23,7 +23,10 @@ const AppNavigator = createStackNavigator(
     defaultNavigationOptions: {
       header: () => (
         <Header style={styles.header}>
-          <Title>Controle de Animais</Title>
+          <Left />
+          <Body>
+            <Title>Controle de Animais</Title>
+          </Body>
         </Header>
       ),
     },
@@ -46,7 +49,6 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  header: {height: 30},
   separator: {
     height: 1,
     backgroundColor: '#CED0CE',
