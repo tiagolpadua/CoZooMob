@@ -1,15 +1,17 @@
 import {
-  Content,
-  Header,
-  Left,
   Button,
+  Content,
+  Form,
+  Header,
   Icon,
-  Body,
-  Title,
+  Input,
+  Item,
+  Left,
   Right,
+  Text,
 } from 'native-base';
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 
 class CadastroAnimal extends Component {
@@ -21,9 +23,6 @@ class CadastroAnimal extends Component {
             <Icon name="arrow-back" />
           </Button>
         </Left>
-        <Body>
-          <Title>Incluir Animal</Title>
-        </Body>
         <Right />
       </Header>
     ),
@@ -31,7 +30,21 @@ class CadastroAnimal extends Component {
   render() {
     return (
       <Content padder>
-        <Text>Tela de Cadastro de Animal</Text>
+        <Form>
+          <Item>
+            <Input placeholder="Nome" />
+          </Item>
+          <Item last>
+            <Input placeholder="URL Imagem" />
+          </Item>
+          <Button
+            full
+            primary
+            style={styles.botaoSalvar}
+            onPress={() => console.warn('Salvar!')}>
+            <Text>Salvar</Text>
+          </Button>
+        </Form>
       </Content>
     );
   }
@@ -45,3 +58,7 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(CadastroAnimal);
+
+const styles = StyleSheet.create({
+  botaoSalvar: {marginTop: 10},
+});
