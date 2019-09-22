@@ -1,4 +1,9 @@
-import {carregarAnimaisAPI, loginAPI, incluirAnimalAPI} from './api';
+import {
+  carregarAnimaisAPI,
+  loginAPI,
+  incluirAnimalAPI,
+  alterarAnimalAPI,
+} from './api';
 import {
   LOGIN,
   CARREGAR_ANIMAIS,
@@ -6,6 +11,7 @@ import {
   FAVORITAR,
   SET_LOADING,
   INCLUIR_ANIMAL,
+  ALTERAR_ANIMAL,
 } from './constants';
 
 function loadingWrapper(asyncFunc) {
@@ -56,16 +62,16 @@ export function incluirAnimal(animal) {
   );
 }
 
-// export function atualizarAnimal(animal) {
-//   return loadingWrapper(dispatch =>
-//     atualizarAnimalAPI(animal).then(res => {
-//       dispatch({
-//         type: ATUALIZAR_ANIMAL,
-//         data: res.data,
-//       });
-//     }),
-//   );
-// }
+export function alterarAnimal(animal) {
+  return loadingWrapper(dispatch =>
+    alterarAnimalAPI(animal).then(res => {
+      dispatch({
+        type: ALTERAR_ANIMAL,
+        data: res.data,
+      });
+    }),
+  );
+}
 
 export function favoritar(animal, usuario) {
   return {

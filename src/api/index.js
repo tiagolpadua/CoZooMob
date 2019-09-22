@@ -24,7 +24,7 @@ export function incluirAnimalAPI(animal) {
   return api.post('/animais', animal);
 }
 
-export function atualizarAnimalAPI(animal) {
+export function alterarAnimalAPI(animal) {
   return api.put(`/animais/${animal._id}`, animal);
 }
 
