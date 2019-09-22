@@ -1,5 +1,10 @@
 import {animais} from '../../data.json';
-import {FAVORITAR, DESFAVORITAR, CARREGAR_ANIMAIS} from '../constants.js';
+import {
+  FAVORITAR,
+  DESFAVORITAR,
+  CARREGAR_ANIMAIS,
+  INCLUIR_ANIMAL,
+} from '../constants.js';
 
 const initialState = animais;
 
@@ -11,6 +16,9 @@ export default function animaisReducer(state = initialState, action) {
   switch (action.type) {
     case CARREGAR_ANIMAIS:
       return action.data;
+
+    case INCLUIR_ANIMAL:
+      return [...state, action.data];
 
     case FAVORITAR: {
       const {animal, usuario} = action.data;

@@ -1,13 +1,13 @@
-import {Container, Header, Title, Body, Left, Right} from 'native-base';
+import {Body, Container, Header, Left, Title} from 'native-base';
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {Provider} from 'react-redux';
-import ListaAnimais from './components/ListaAnimais';
-import CadastroAnimal from './components/CadastroAnimal';
-import Login from './components/Login';
 import Carregando from './components/Carregando';
+import IncluirAnimal from './components/IncluirAnimal';
+import ListaAnimais from './components/ListaAnimais';
+import Login from './components/Login';
 import configureStore from './configureStore';
 
 const store = configureStore();
@@ -16,7 +16,7 @@ const AppNavigator = createStackNavigator(
   {
     Login,
     ListaAnimais,
-    CadastroAnimal,
+    IncluirAnimal,
   },
   {
     initialRouteName: 'Login',

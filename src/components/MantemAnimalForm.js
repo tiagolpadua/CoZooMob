@@ -1,6 +1,6 @@
 import {Button, Content, Form, Input, Item, Label, Text} from 'native-base';
 import React, {Component} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Field, reduxForm} from 'redux-form';
 import validator from 'validator';
 
@@ -8,8 +8,8 @@ const validate = values => {
   const error = {};
   error.nome = '';
   error.urlImagem = '';
-  var nome = values.nome || '';
-  var urlImagem = values.urlImagem || '';
+  const nome = values.nome || '';
+  const urlImagem = values.urlImagem || '';
 
   if (!validator.isURL(urlImagem)) {
     error.urlImagem = 'URL inválida';

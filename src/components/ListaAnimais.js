@@ -26,7 +26,7 @@ class ListaAnimais extends Component {
           containerStyle={{}}
           style={styles.fab}
           position="bottomRight"
-          onPress={() => this.props.navigation.navigate('CadastroAnimal')}>
+          onPress={() => this.props.navigation.navigate('IncluirAnimal')}>
           <Icon name="add" />
         </Fab>
       </View>
