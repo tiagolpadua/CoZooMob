@@ -6,6 +6,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {Provider} from 'react-redux';
 import Carregando from './components/Carregando';
 import IncluirAnimal from './components/IncluirAnimal';
+import AlterarAnimal from './components/AlterarAnimal';
 import ListaAnimais from './components/ListaAnimais';
 import Login from './components/Login';
 import configureStore from './configureStore';
@@ -17,6 +18,7 @@ const AppNavigator = createStackNavigator(
     Login,
     ListaAnimais,
     IncluirAnimal,
+    AlterarAnimal,
   },
   {
     initialRouteName: 'Login',

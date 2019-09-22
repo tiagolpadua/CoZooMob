@@ -12,13 +12,15 @@ class ListaAnimais extends Component {
   }
 
   render() {
-    const {animais} = this.props;
+    const {animais, navigation} = this.props;
     return (
       <View style={styles.container}>
         <Content padder>
           <FlatList
             data={animais}
-            renderItem={({item}) => <Animal animal={item} />}
+            renderItem={({item}) => (
+              <Animal navigation={navigation} animal={item} />
+            )}
             keyExtractor={item => item.nome}
           />
         </Content>

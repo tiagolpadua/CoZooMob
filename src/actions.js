@@ -56,6 +56,17 @@ export function incluirAnimal(animal) {
   );
 }
 
+// export function atualizarAnimal(animal) {
+//   return loadingWrapper(dispatch =>
+//     atualizarAnimalAPI(animal).then(res => {
+//       dispatch({
+//         type: ATUALIZAR_ANIMAL,
+//         data: res.data,
+//       });
+//     }),
+//   );
+// }
+
 export function favoritar(animal, usuario) {
   return {
     type: FAVORITAR,
