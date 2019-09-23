@@ -1,4 +1,3 @@
-import {animais} from '../../data.json';
 import {
   FAVORITAR,
   DESFAVORITAR,
@@ -6,7 +5,7 @@ import {
   INCLUIR_ANIMAL,
 } from '../constants.js';
 
-const initialState = animais;
+const initialState = [];
 
 function atualizaAnimal(listaAnimais, animal) {
   return listaAnimais.map(a => (a._id === animal._id ? animal : a));
