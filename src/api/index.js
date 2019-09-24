@@ -16,8 +16,8 @@ export function detalharAnimalAPI(id) {
   return api.get(`/animais/${id}`);
 }
 
-export function excluirAnimalAPI(id) {
-  return api.delete(`/animais/${id}`);
+export function excluirAnimalAPI(animal) {
+  return api.delete(`/animais/${animal._id}`);
 }
 
 export function incluirAnimalAPI(animal) {

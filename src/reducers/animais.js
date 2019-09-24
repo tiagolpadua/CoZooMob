@@ -1,9 +1,10 @@
 import {
-  FAVORITAR,
-  DESFAVORITAR,
-  CARREGAR_ANIMAIS,
-  INCLUIR_ANIMAL,
   ALTERAR_ANIMAL,
+  CARREGAR_ANIMAIS,
+  DESFAVORITAR,
+  FAVORITAR,
+  INCLUIR_ANIMAL,
+  EXCLUIR_ANIMAL,
 } from '../constants.js';
 
 const initialState = [];
@@ -19,6 +20,9 @@ export default function animaisReducer(state = initialState, action) {
 
     case INCLUIR_ANIMAL:
       return [...state, action.data];
+
+    case EXCLUIR_ANIMAL:
+      return state.filter(animal => animal._id !== action.data._id);
 
     case ALTERAR_ANIMAL:
       return atualizaAnimal(state, action.data);
