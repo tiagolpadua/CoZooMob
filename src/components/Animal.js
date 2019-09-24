@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {connect} from 'react-redux';
 import BotaoFavoritar from './BotaoFavoritar';
@@ -19,6 +20,10 @@ class Animal extends Component {
     return !!animal.favoritoUsuarios.find(usuario => usuario === usuarioLogado);
   }
 
+  excluirAnimal(animal) {
+    console.warn(animal);
+  }
+
   render() {
     const {animal, navigation} = this.props;
 
@@ -27,10 +32,16 @@ class Animal extends Component {
         <CardItem header bordered>
           <Text style={styles.nomeAnimal}>{animal.nome}</Text>
           <Right>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('AlterarAnimal', {animal})}>
-              <Icon name="create" style={styles.icone} />
-            </TouchableOpacity>
+            <View style={styles.actionIconsContainter}>
+              <TouchableOpacity
+                style={styles.iconAlterar}
+                onPress={() => navigation.navigate('AlterarAnimal', {animal})}>
+                <Icon name="create" style={styles.icone} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.excluirAnimal(animal)}>
+                <Icon name="trash" style={styles.icone} />
+              </TouchableOpacity>
+            </View>
           </Right>
         </CardItem>
         <CardItem bordered>
@@ -84,6 +95,8 @@ const styles = StyleSheet.create({
   nomeAnimal: {fontSize: 18, fontWeight: 'bold', flex: 1},
   icone: {fontSize: 30, color: 'black'},
   imagemAnimal: {width: width * 0.7, height: width * 0.7},
+  actionIconsContainter: {flexDirection: 'row'},
+  iconAlterar: {marginRight: 10},
   imageContainer: {
     flex: 1,
     justifyContent: 'center',

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "reverse": "adb reverse tcp:3000 tcp:3000",
     "test": "jest",
     "lint": "eslint ."
   },
