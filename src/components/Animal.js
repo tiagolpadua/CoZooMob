@@ -1,6 +1,7 @@
-import {Body, Card, CardItem, Right, Icon} from 'native-base';
+import {Body, Card, CardItem, Icon, Right} from 'native-base';
 import React, {Component} from 'react';
 import {
+  Alert,
   Dimensions,
   Image,
   StyleSheet,
@@ -9,9 +10,9 @@ import {
   View,
 } from 'react-native';
 import {connect} from 'react-redux';
-import BotaoFavoritar from './BotaoFavoritar';
-import {favoritar, desfavoritar} from '../actions';
 import {bindActionCreators} from 'redux';
+import {desfavoritar, favoritar} from '../actions';
+import BotaoFavoritar from './BotaoFavoritar';
 
 const {width} = Dimensions.get('screen');
 
@@ -21,7 +22,18 @@ class Animal extends Component {
   }
 
   excluirAnimal(animal) {
-    console.warn(animal);
+    Alert.alert(
+      'Atenção!',
+      'Confirma a exclusão do animal ' + animal.nome + '?',
+      [
+        {text: 'OK', onPress: () => console.warn('Remover!')},
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+      ],
+      {cancelable: true},
+    );
   }
 
   render() {
