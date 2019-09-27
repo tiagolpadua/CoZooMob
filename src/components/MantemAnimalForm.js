@@ -1,8 +1,11 @@
 import {Button, Content, Form, Input, Item, Label, Text} from 'native-base';
 import React, {Component} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
-import {Field, reduxForm} from 'redux-form';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
+import {connect} from 'react-redux';
+import {Field, formValueSelector, reduxForm} from 'redux-form';
 import validator from 'validator';
+
+const {width} = Dimensions.get('screen');
 
 const validate = values => {
   const error = {};
@@ -60,16 +63,43 @@ class MantemAnimalForm extends Component {
             <Text>Salvar</Text>
           </Button>
         </Form>
+
+        <View style={styles.previewContainer}>
+          <Text style={styles.titulo}>Preview</Text>
+
+          {validator.isURL(this.props.urlImagem || '') && (
+            <Image
+              source={{
+                uri: this.props.urlImagem,
+              }}
+              style={styles.imagemAnimal}
+            />
+          )}
+        </View>
       </Content>
     );
   }
 }
 
-export default reduxForm({
+MantemAnimalForm = reduxForm({
   form: 'mantemAnimal',
   validate,
 })(MantemAnimalForm);
 
+const selector = formValueSelector('mantemAnimal');
+MantemAnimalForm = connect(state => ({
+  urlImagem: selector(state, 'urlImagem'),
+}))(MantemAnimalForm);
+
+export default MantemAnimalForm;
+
 const styles = StyleSheet.create({
   botaoSalvar: {marginTop: 10},
+  imagemAnimal: {width: width * 0.7, height: width * 0.7},
+  titulo: {fontSize: 18, fontWeight: 'bold', marginTop: 10},
+  previewContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
