@@ -1,6 +1,6 @@
 import {Content, Fab, Icon, View} from 'native-base';
 import React, {Component} from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import {FlatList, StyleSheet, RefreshControl} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {carregarAnimais} from '../actions';
@@ -11,11 +11,27 @@ class ListaAnimais extends Component {
     this.props.carregarAnimais();
   }
 
+  state = {
+    isFetching: false,
+  };
+
+  onRefresh() {
+    this.setState({isFetching: true}, () => this.props.carregarAnimais());
+    // this.setState({isFetching: true}, () => console.warn('refresh'));
+  }
+
   render() {
     const {animais, navigation} = this.props;
     return (
       <View style={styles.container}>
-        <Content padder>
+        <Content
+          padder
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isFetching}
+              onRefresh={() => this.onRefresh()}
+            />
+          }>
           <FlatList
             data={animais}
             renderItem={({item}) => (

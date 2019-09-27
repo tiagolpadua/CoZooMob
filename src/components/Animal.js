@@ -68,7 +68,7 @@ class Animal extends Component {
         </CardItem>
         <CardItem footer bordered>
           <BotaoFavoritar
-            favoritado={this.isFavoritado(animal, this.props.usuarioLogado)}
+            sss={this.isFavoritado(animal, this.props.usuarioLogado)}
             favoritarCallback={() =>
               this.props.favoritar(animal, this.props.usuarioLogado)
             }

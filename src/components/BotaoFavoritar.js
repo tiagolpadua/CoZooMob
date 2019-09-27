@@ -1,15 +1,14 @@
 import {Icon} from 'native-base';
 import React, {Component} from 'react';
 import {TouchableOpacity} from 'react-native';
-import PropTypes from 'prop-types';
 
-export default class BotaoFavoritar extends Component {
-  static propTypes = {
-    favoritado: PropTypes.bool.isRequired,
-    favoritarCallback: PropTypes.func.isRequired,
-    desfavoritarCallback: PropTypes.func.isRequired,
-  };
+type Props = {
+  favoritado: boolean,
+  favoritarCallback: func,
+  desfavoritarCallback: func,
+};
 
+export default class BotaoFavoritar extends Component<Props> {
   render() {
     const {favoritado, favoritarCallback, desfavoritarCallback} = this.props;
 
