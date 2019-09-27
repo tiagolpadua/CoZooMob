@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 
 export default class BotaoFavoritar extends Component {
   static propTypes = {
-    foo: PropTypes.number.isRequired,
-    bar: PropTypes.string,
+    favoritado: PropTypes.bool.isRequired,
+    favoritarCallback: PropTypes.func.isRequired,
+    desfavoritarCallback: PropTypes.func.isRequired,
   };
 
   render() {
