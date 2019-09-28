@@ -9,6 +9,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.2",
     "axios": "^0.19.0",
     "native-base": "^2.13.8",
     "react": "16.8.6",
@@ -30,7 +31,9 @@
     "eslint": "5.16.0",
     "jest": "24.9.0",
     "metro-react-native-babel-preset": "0.54.1",
-    "react-test-renderer": "16.8.6"
+    "react-test-renderer": "16.8.6",
+    "reactotron-react-native": "^4.0.2",
+    "reactotron-redux": "^3.1.2"
   },
   "jest": {
     "preset": "react-native",
