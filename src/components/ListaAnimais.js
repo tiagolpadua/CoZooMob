@@ -11,15 +11,6 @@ class ListaAnimais extends Component {
     this.props.carregarAnimais();
   }
 
-  state = {
-    isFetching: false,
-  };
-
-  onRefresh() {
-    this.setState({isFetching: true}, () => this.props.carregarAnimais());
-    // this.setState({isFetching: true}, () => console.warn('refresh'));
-  }
-
   render() {
     const {animais, navigation} = this.props;
     return (
@@ -28,8 +19,8 @@ class ListaAnimais extends Component {
           padder
           refreshControl={
             <RefreshControl
-              refreshing={this.state.isFetching}
-              onRefresh={() => this.onRefresh()}
+              refreshing={this.props.loading}
+              onRefresh={() => this.props.carregarAnimais()}
             />
           }>
           <FlatList
@@ -56,6 +47,7 @@ const mapStateToProps = state => {
   return {
     animais: state.animais,
     usuarioLogado: state.usuarioLogado,
+    loading: state.loading,
   };
 };
 

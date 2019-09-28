@@ -36,7 +36,7 @@ export function login(usuario, senha) {
     loginAPI(usuario, senha).then(res => {
       dispatch({
         type: LOGIN,
-        data: {usuarioLogado: usuario, token: res.data.token},
+        data: usuario,
       });
     }),
   );
@@ -87,21 +87,29 @@ export function excluirAnimal(animal) {
 }
 
 export function favoritar(animal, usuario) {
-  return {
-    type: FAVORITAR,
-    data: {
-      animal,
-      usuario,
-    },
-  };
+  const novoAnimal = {...animal};
+  novoAnimal.favoritoUsuarios = [...novoAnimal.favoritoUsuarios, usuario];
+  return loadingWrapper(dispatch =>
+    alterarAnimalAPI(novoAnimal).then(res => {
+      dispatch({
+        type: ALTERAR_ANIMAL,
+        data: res.data,
+      });
+    }),
+  );
 }
 
 export function desfavoritar(animal, usuario) {
-  return {
-    type: DESFAVORITAR,
-    data: {
-      animal,
-      usuario,
-    },
-  };
+  const novoAnimal = {...animal};
+  novoAnimal.favoritoUsuarios = novoAnimal.favoritoUsuarios.filter(
+    u => u !== usuario,
+  );
+  return loadingWrapper(dispatch =>
+    alterarAnimalAPI(novoAnimal).then(res => {
+      dispatch({
+        type: ALTERAR_ANIMAL,
+        data: res.data,
+      });
+    }),
+  );
 }
